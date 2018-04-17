@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+  <link href="/static/styles.css" rel="stylesheet"/>
+
+  <title>{% block title %}{% endblock %}</title>
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light border">
+    <a class="navbar-brand" href="/"><span class="blue">C</span><span class="red">$</span><span class="yellow">5</span><span class="green">0</span> <span class="red">Finance</span></a>
+    <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      {% if session.user_id %}
+      <ul class="navbar-nav mr-auto mt-2">
+        <li class="nav-item"><a class="nav-link" href="/">Index</a></li>
+        <li class="nav-item"><a class="nav-link" href="/quote">Quote</a></li>
+        <li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
+        <li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
+        <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
+      </ul>
+      <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a class="nav-link" href="/password">Change Password</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+      </ul>
+      {% else %}
+      <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+      </ul>
+      {% endif %}
+    </div>
+  </nav>
+
+
+  <main class="container pt-4">
+    {% block main %}{% endblock %}
+  </main>
+
+  <!-- Bootstrap stuff -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+
+</html>
