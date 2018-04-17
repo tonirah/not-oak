@@ -68,14 +68,14 @@ def load_labels(label_file):
   return label
 
 if __name__ == "__main__":
-  file_name = "tf_files/flower_photos/daisy/3475870145_685a19116d.jpg"
-  model_file = "tf_files/retrained_graph.pb"
-  label_file = "tf_files/retrained_labels.txt"
-  input_height = 224
-  input_width = 224
+  file_name = "leaves/leaves_examples/eiche0.jpeg"
+  model_file = "leaves/retrained_inception_v3_4000.pb"
+  label_file = "leaves/retrained_labels.txt"
+  input_height = 299
+  input_width = 299
   input_mean = 128
   input_std = 128
-  input_layer = "input"
+  input_layer = "Mul"
   output_layer = "final_result"
 
   parser = argparse.ArgumentParser()
