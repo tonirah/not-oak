@@ -18,8 +18,10 @@ def load_graph(model_file):
 
   return graph
 
-def label_leaf():
-  file_name = "leaves/leaves_examples/eiche0.jpeg"
+def label_leaf(path):
+
+  # Stuff
+  file_name = path
   model_file = "leaves/retrained_inception_v3_4000.pb"
   label_file = "leaves/retrained_labels.txt"
   input_height = 299
@@ -92,7 +94,7 @@ def load_labels(label_file):
   return label
 
 if __name__ == "__main__":
-  label_leaf()
+  label_leaf("leaves/leaves_examples/eiche0.jpeg")
 
 
 
