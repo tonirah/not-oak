@@ -54,12 +54,12 @@ def label_leaf(path):
   top_k = results.argsort()[-5:][::-1]
   labels = load_labels(label_file)
 
-  print('\nEvaluation time (1-image): {:.3f}s\n'.format(end-start))
+  leaf_result = '\nEvaluation time (1-image): {:.3f}s\n'.format(end-start)
 
   for i in top_k:
-    print(labels[i], results[i])
+    leaf_result += labels[i] + ' ' + str(results[i]) + '\n'
 
-  return "Test"
+  return leaf_result
 
 def read_tensor_from_image_file(file_name, input_height=299, input_width=299,
         input_mean=0, input_std=255):
@@ -94,7 +94,7 @@ def load_labels(label_file):
   return label
 
 if __name__ == "__main__":
-  label_leaf("leaves/leaves_examples/eiche0.jpeg")
+  print(label_leaf("leaves/leaves_examples/eiche0.jpeg"))
 
 
 
