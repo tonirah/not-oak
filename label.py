@@ -54,10 +54,15 @@ def label_leaf(path):
   top_k = results.argsort()[-5:][::-1]
   labels = load_labels(label_file)
 
-  leaf_result = '\nEvaluation time (1-image): {:.3f}s\n'.format(end-start)
+  leaf_result = dict()
+  leaf_result['time'] = '{:.2f}s'.format(end-start)
+
+  leaf_result['labels'] = []
+  leaf_result['results'] = []
 
   for i in top_k:
-    leaf_result += labels[i] + ' ' + str(results[i]) + '\n'
+    leaf_result['labels'].append(labels[i])
+    leaf_result['results'].append(str(results[i]))
 
   return leaf_result
 
