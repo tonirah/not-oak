@@ -35,13 +35,28 @@ def upload_file():
     thumbnail_url1 = None
     thumbnail_url2 = None
     if request.method == 'POST':
+        # Check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
         file_to_upload = request.files['file']
-        if file_to_upload:
-            upload_result = upload(file_to_upload)
-            thumbnail_url1, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=100,
-                                                     height=100)
-            thumbnail_url2, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=200,
-                                                     height=100, radius=20, effect="sepia")
+        # If user does not select file, browser also
+        # submit an empty part without filename
+        if file_to_upload.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        # Check if filetype is okay
+        if not allowed_file(file_to_upload.filename):
+            flash('File-type not allowed. Use .png, .jpg or .jpeg.')
+            print('File-type not allowed. Use .png, .jpg or .jpeg.')
+            return redirect(request.url)
+        # Upload file
+        upload_result = upload(file_to_upload, folder = 'uploads')
+        thumbnail_url1, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=100,
+                                                 height=100)
+        thumbnail_url2, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=200,
+                                                 height=100, radius=20, effect="sepia")
+
     return render_template('upload_form.html', upload_result=upload_result, thumbnail_url1=thumbnail_url1,
 thumbnail_url2=thumbnail_url2)
 
