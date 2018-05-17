@@ -1,6 +1,11 @@
 import os
 from flask import Flask, flash, render_template, request, redirect, url_for, send_from_directory
 from werkzeug import secure_filename
+import cloudinary
+from cloudinary.uploader import upload
+from cloudinary.utils import cloudinary_url
+
+from label import label_leaf
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = './pictures'
@@ -9,7 +14,12 @@ app = Flask(__name__)
 app.secret_key = '@3xffxbex9b5x06:x8f=xc0x04x15Bxe6xc2'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-from label import label_leaf
+cloudinary.config( 
+  cloud_name = "toni-not-oak", 
+  api_key = "866339269462168", 
+  api_secret = "TwmBPqSIbsuwWcG2w3-SrkokM2Q" 
+)
+
 
 @app.route('/')
 def index():
@@ -19,8 +29,25 @@ def index():
                          time=leaf_result['time'])
 
 
+@app.route('/cloud', methods=['GET', 'POST'])
+def upload_file():
+    upload_result = None
+    thumbnail_url1 = None
+    thumbnail_url2 = None
+    if request.method == 'POST':
+        file_to_upload = request.files['file']
+        if file_to_upload:
+            upload_result = upload(file_to_upload)
+            thumbnail_url1, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=100,
+                                                     height=100)
+            thumbnail_url2, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=200,
+                                                     height=100, radius=20, effect="sepia")
+    return render_template('upload_form.html', upload_result=upload_result, thumbnail_url1=thumbnail_url1,
+thumbnail_url2=thumbnail_url2)
+
+
 @app.route('/upload', methods=['GET', 'POST'])
-def upload():
+def own_upload():
   if request.method == 'POST':
       # Check if the post request has the file part
       if 'file' not in request.files:
