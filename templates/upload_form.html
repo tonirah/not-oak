@@ -24,10 +24,10 @@ Upload to Cloudinary
   <h3>Upload API Result</h3>
   <div>{{ upload_result }}</div>
   <h3>Thumbnails:</h3>
-  <div><a href="{{thumbnail_url1}}">{{thumbnail_url1}}</a></div>
-  <img src="{{ thumbnail_url1 }}"/>
-  <div><a href="{{thumbnail_url2}}">{{thumbnail_url2}}</a></div>
-  <img src="{{ thumbnail_url2 }}"/>
+  <div><a href="{{thumbnail_for_model}}">{{thumbnail_for_model}}</a></div>
+  <img src="{{ thumbnail_for_model }}"/>
+  <div><a href="{{thumbnail_for_user}}">{{thumbnail_for_user}}</a></div>
+  <img src="{{ thumbnail_for_user }}"/>
   <h3>Original:</h3>
   <img src="{{ upload_result['url'] }}"/>
 {% endif %}

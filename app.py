@@ -32,8 +32,8 @@ def index():
 @app.route('/cloud', methods=['GET', 'POST'])
 def upload_file():
     upload_result = None
-    thumbnail_url1 = None
-    thumbnail_url2 = None
+    thumbnail_for_model = None
+    thumbnail_for_user = None
     if request.method == 'POST':
         # Check if the post request has the file part
         if 'file' not in request.files:
@@ -52,13 +52,13 @@ def upload_file():
             return redirect(request.url)
         # Upload file
         upload_result = upload(file_to_upload, folder = 'uploads')
-        thumbnail_url1, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=100,
-                                                 height=100)
-        thumbnail_url2, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=200,
-                                                 height=100, radius=20, effect="sepia")
+        thumbnail_for_model, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="scale", width=299,
+                                                 height=299)
+        thumbnail_for_user, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fit", width=600,
+                                                 height=600)
 
-    return render_template('upload_form.html', upload_result=upload_result, thumbnail_url1=thumbnail_url1,
-thumbnail_url2=thumbnail_url2)
+    return render_template('upload_form.html', upload_result=upload_result, thumbnail_for_model=thumbnail_for_model,
+thumbnail_for_user=thumbnail_for_user)
 
 
 
