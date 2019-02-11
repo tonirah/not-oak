@@ -61,37 +61,6 @@ def upload_file():
 thumbnail_url2=thumbnail_url2)
 
 
-@app.route('/upload', methods=['GET', 'POST'])
-def own_upload():
-  if request.method == 'POST':
-      # Check if the post request has the file part
-      if 'file' not in request.files:
-          flash('No file part')
-          print('No file part')
-          return redirect(request.url)
-      file = request.files['file']
-      # If user does not select file, browser also
-      # submit an empty part without filename
-      if file.filename == '':
-          flash('No selected file')
-          print('No selected file')
-          return redirect(request.url)
-      # Check if filetype is okay
-      if not allowed_file(file.filename):
-          flash('File-type not allowed. Use .png, .jpg or .jpeg.')
-          print('File-type not allowed. Use .png, .jpg or .jpeg.')
-          return redirect(request.url)
-      # Save file
-      filename = secure_filename(file.filename)
-      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-      return redirect(url_for('uploaded_file', filename=filename))
-  return render_template("upload.html")
-
-
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-  return send_from_directory(app.config['UPLOAD_FOLDER'],
-                             filename)
 
 
 def allowed_file(filename):
