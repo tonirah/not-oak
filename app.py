@@ -4,10 +4,11 @@ from werkzeug import secure_filename
 import cloudinary
 from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
+import requests
 
 from label import label_leaf
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 UPLOAD_FOLDER = './pictures'
 
 app = Flask(__name__)
@@ -45,8 +46,10 @@ def index():
                                                  height=299)
         thumbnail_for_user, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fit", width=600,
                                                  height=600, secure=True)
-        # Do analysis
-        leaf_result = label_leaf('leaves/leaves_examples/toni_n_0.jpg')
+        # Analysis
+        image = requests.get(thumbnail_for_model, allow_redirects=True)
+        open('image/image.jpg', 'wb').write(image.content)
+        leaf_result = label_leaf('image/image.jpg')
         return render_template('analysis.html', leaf=leaf_result['labels'][0],
                          certainty=leaf_result['results'][0], 
                          time=leaf_result['time'], thumbnail_for_user=thumbnail_for_user)
