@@ -6,11 +6,16 @@ Analysis
 
 {% block main %}
 <h1 class="pb-4">Analysis</h1>
-<p>Leaf: {{ leaf }}</p>
-<p>Certainty: {{ certainty }}</p>
-<p>Time for analysis: {{ time }}</p>
-
 <img src="{{ thumbnail_for_user }}"/>
+<p>
+    Leaf: {{ leaf }} || 
+    Certainty: {{ certainty }} || 
+    Time for analysis: {{ time }}
+</p>
+
+<form action="/" method="get">
+    <input type="submit" value="New Analysis">
+</form>
 
 
 {% endblock %}
