@@ -1,15 +1,16 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Result
+Analysis
 {% endblock %}
 
 {% block main %}
-<h1 class="pb-4">Result</h1>
+<h1 class="pb-4">Analysis</h1>
 <p>Leaf: {{ leaf }}</p>
 <p>Certainty: {{ certainty }}</p>
 <p>Time for analysis: {{ time }}</p>
 
+<img src="{{ thumbnail_for_user }}"/>
 
 
 {% endblock %}

@@ -21,19 +21,8 @@ cloudinary.config(
 )
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-  leaf_result = label_leaf("leaves/leaves_examples/toni_n_0.jpg")
-  return render_template("index.html", leaf=leaf_result['labels'][0],
-                         certainty=leaf_result['results'][0], 
-                         time=leaf_result['time'])
-
-
-@app.route('/cloud', methods=['GET', 'POST'])
-def upload_file():
-    upload_result = None
-    thumbnail_for_model = None
-    thumbnail_for_user = None
     if request.method == 'POST':
         # Check if the post request has the file part
         if 'file' not in request.files:
@@ -56,9 +45,14 @@ def upload_file():
                                                  height=299)
         thumbnail_for_user, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fit", width=600,
                                                  height=600)
-
-    return render_template('upload_form.html', upload_result=upload_result, thumbnail_for_model=thumbnail_for_model,
-thumbnail_for_user=thumbnail_for_user)
+        # Do analysis
+        leaf_result = label_leaf('leaves/leaves_examples/toni_n_0.jpg')
+        return render_template('analysis.html', leaf=leaf_result['labels'][0],
+                         certainty=leaf_result['results'][0], 
+                         time=leaf_result['time'], thumbnail_for_user=thumbnail_for_user)
+        
+    # Upload form via GET request
+    return render_template('upload_form.html')
 
 
 
