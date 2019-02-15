@@ -44,7 +44,7 @@ def index():
         # Upload file
         upload_result = upload(file_to_upload, folder = 'uploads')
         thumbnail_for_model, options = cloudinary_url(
-            upload_result['public_id'], format="jpg", crop="fill", width=299,
+            upload_result['public_id'], format="jpg", crop="scale", width=299,
             height=299)
         thumbnail_for_user, options = cloudinary_url(
             upload_result['public_id'], format="jpg", crop="fit", width=600,
