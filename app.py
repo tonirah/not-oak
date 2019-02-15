@@ -1,5 +1,6 @@
 import os
-from flask import Flask, flash, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, flash, render_template, request, redirect, \
+                  url_for, send_from_directory
 from werkzeug import secure_filename
 import cloudinary
 from cloudinary.uploader import upload
@@ -16,9 +17,9 @@ app.secret_key = '@3xffxbex9b5x06:x8f=xc0x04x15Bxe6xc2'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 cloudinary.config( 
-  cloud_name = "toni-not-oak", 
-  api_key = "866339269462168", 
-  api_secret = "TwmBPqSIbsuwWcG2w3-SrkokM2Q" 
+    cloud_name = "toni-not-oak",
+    api_key = "866339269462168",
+    api_secret = "TwmBPqSIbsuwWcG2w3-SrkokM2Q"
 )
 
 
@@ -42,17 +43,20 @@ def index():
             return redirect(request.url)
         # Upload file
         upload_result = upload(file_to_upload, folder = 'uploads')
-        thumbnail_for_model, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fill", width=299,
-                                                 height=299)
-        thumbnail_for_user, options = cloudinary_url(upload_result['public_id'], format="jpg", crop="fit", width=600,
-                                                 height=600, secure=True)
+        thumbnail_for_model, options = cloudinary_url(
+            upload_result['public_id'], format="jpg", crop="fill", width=299,
+            height=299)
+        thumbnail_for_user, options = cloudinary_url(
+            upload_result['public_id'], format="jpg", crop="fit", width=600,
+            height=600, secure=True)
         # Analysis
         image = requests.get(thumbnail_for_model, allow_redirects=True)
         open('image/image.jpg', 'wb').write(image.content)
         leaf_result = label_leaf('image/image.jpg')
-        return render_template('analysis.html', leaf=leaf_result['labels'][0],
-                         certainty=leaf_result['results'][0], 
-                         time=leaf_result['time'], thumbnail_for_user=thumbnail_for_user)
+        return render_template('analysis.html',
+            leaf=leaf_result['labels'][0],
+            certainty=leaf_result['results'][0], time=leaf_result['time'],
+            thumbnail_for_user=thumbnail_for_user)
 
     # Upload form via GET request
     return render_template('upload_form.html')
@@ -61,5 +65,5 @@ def index():
 
 
 def allowed_file(filename):
-  return '.' in filename and \
-    filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
