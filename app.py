@@ -59,7 +59,7 @@ def index():
             thumbnail_for_user=thumbnail_for_user)
 
     # Upload form via GET request
-    return render_template('upload_form.html')
+    return render_template('index.html')
 
 
 

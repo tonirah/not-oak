@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Oak or not oak?
+{% endblock %}
+
+{% block main %}
+
+
+<!-- Intro text, reference hotdog app, upload a jpg picture or use examples below. More information about the project in about. -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<h2>Upload image of leaf (closeup, format .jpg)</h2>
+<!-- Make nice form -->
+<form action="" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
+
+<!-- 9 example images on cloudify -->
+<h2>Try an example image (these are unknown to the model)</h2>
+
+
+
+{% endblock %}
