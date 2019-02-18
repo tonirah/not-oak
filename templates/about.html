@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    About Oak or not oak?
+{% endblock %}
+
+{% block main %}
+<h2 class="pb-4">About <em>Oak or not oak?</em></h2>
+
+<p>
+	Hi, my name is <a href="https://github.com/tonirah/" rel="noreferrer" target="_blank">Toni</a>, I am a Philosophy & Economics graduate and technology and sustainability enthusiast. After my studies I started Harvard's awesome <a href="https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x" rel="noreferrer" target="_blank">CS50</a> course, <q>an introduction to the intellectual enterprises of computer science and the art of programming</q>. This is my final project for the course. 
+</p>
+<p>
+	I made a computer vision AI app, that can detect oak leaves! You can upload a closeup picture of a leaf, and the app will hopefully correctly analyze whether it is the leaf of an oak tree, or not. It is inspired by the well-known <a href="https://www.engadget.com/2017/05/15/not-hotdog-app-hbo-silicon-valley/?guccounter=1&guce_referrer_us=aHR0cHM6Ly93d3cuZWNvc2lhLm9yZy8&guce_referrer_cs=6117ldpWVx6-ZIUJH2WX1Q" rel="noreferrer" target="_blank">Not Hotdog app</a>. 
+</p>
+<p>
+	<a href="https://en.wikipedia.org/wiki/Computer_vision" rel="noreferrer" target="_blank">Computer vision</a> means, that an image (or video) is used as an input for an algorithm / computer to work with. I will not try to give a clear definition of AI, or artificial intelligence, but we usually mean that a machine is able to perform a task in a way we would consider "smart". <a href="https://www.forbes.com/sites/bernardmarr/2016/12/06/what-is-the-difference-between-artificial-intelligence-and-machine-learning/#6b6244562742" rel="noreferrer" target="_blank">Machine learning</a> would probably be the more correct term in this case anyway.
+</p>
+<p>
+	After you uploaded your picture, it gets converted into a vector format the algorithm can work with. It then gets send through an <a href="https://www.techopedia.com/definition/5967/artificial-neural-network-ann" rel="noreferrer" target="_blank">artificial neural network (model)</a>, which I trained with around 1000 pictures of leaves I <a href="https://msollami.com/code/2017/1/3/google-image-scraper" rel="noreferrer" target="_blank">scraped from Google Images</a>. In this training, the model got to see many labeled images of leaves and tried to find relevant patterns, testing itself at the end by looking at images it had not seen before.
+</p>
+<p>
+	Because it is very hard to build and train a model from scratch, I used an existing model (<a href="https://medium.com/@sh.tsang/review-inception-v3-1st-runner-up-image-classification-in-ilsvrc-2015-17915421f77c" rel="noreferrer" target="_blank">Googles Inception_v3</a>) which can recognize various elements in images (but not oak leaves), and <a href="https://www.tensorflow.org/hub/tutorials/image_retraining" rel="noreferrer" target="_blank">retrained it with my images</a> (<a href="https://en.wikipedia.org/wiki/Transfer_learning" rel="noreferrer" target="_blank">transfer learning</a>). Only the last layers of the model are changed, and it can benefit from all the things it previously learned with lots of data and computing power. It's like learning a new piano peace, for a beginner vs. for an expirienced pianist. 
+</p>
+<p>
+	I used Python and the <a href="https://www.tensorflow.org" rel="noreferrer" target="_blank">TensorFlow</a> framework, which has functions ready to use to handle models and retraining. My web-app has a <a href="http://flask.pocoo.org/">Flask</a> backend and <a href="https://getbootstrap.com/" rel="noreferrer" target="_blank">Bootstrap</a> frontend, is deployed on <a href="https://www.heroku.com" rel="noreferrer" target="_blank">Heroku</a>, while images are handled with <a href="https://cloudinary.com" rel="noreferrer" target="_blank">Cloudinary</a>. 
+</p>
+{% endblock %}

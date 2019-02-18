@@ -62,6 +62,27 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+@app.route('/analysis_example', methods=['GET', 'POST'])
+def examples():
+    if request.method == 'POST':
+        thumbnail_for_user = request.form.get('postImage')
+        # Resize for model via Cloudinary URL
+        thumbnail_for_model = thumbnail_for_user.replace("w_600","w_299,h_299")
+        # Analysis
+        image = requests.get(thumbnail_for_model, allow_redirects=True)
+        open('image/image.jpg', 'wb').write(image.content)
+        leaf_result = label_leaf('image/image.jpg')
+        return render_template('analysis.html',
+            leaf=leaf_result['labels'][0],
+            certainty=leaf_result['results'][0], time=leaf_result['time'],
+            thumbnail_for_user=thumbnail_for_user)
+
+    return render_template('index.html')
 
 
 def allowed_file(filename):

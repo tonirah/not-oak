@@ -8,6 +8,12 @@
 
 
 <!-- Intro text, reference hotdog app, upload a jpg picture or use examples below. More information about the project in about. -->
+<p>
+    Welcome! My name is <a href="https://github.com/tonirah/" rel="noreferrer" target="_blank">Toni</a>, and for my <a href="https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x" rel="noreferrer" target="_blank">CS50</a> final project,
+    I made a computer vision AI app, that can detect oak leaves! Upload an .jpg image of a leaf, or try one of the examples below.
+    See <a href="/about">about</a> for more info about the project.
+</p>
+
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul class=flashes>
@@ -24,10 +30,29 @@
     <input type="file" name="file">
     <input type="submit" value="Upload">
 </form>
+<br>
 
 <!-- 9 example images on cloudify -->
+<form name="exampleForm"  action="analysis_example" method="post">
+    <input type="hidden" id="postImage" name="postImage" value="">
+</form>
 <h2>Try an example image (these are unknown to the model)</h2>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/oak0.jpg"></a>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/some_leaf.jpg"></a>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/oak1.jpg"></a>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/beech.jpg"></a>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/apple0.jpg"></a>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/oak2.jpg"></a>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/maple1.jpg"></a>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/oak3.jpg"></a>
+<a href="#"><img class="examples" src="https://res.cloudinary.com/toni-not-oak/image/upload/c_scale,w_600/v1550268857/examples/maple0.jpg"></a>
 
-
-
+<script type="text/javascript">
+    document.querySelectorAll(".examples").forEach(function(example) {
+        example.addEventListener("click", function() {
+            document.querySelector("#postImage").setAttribute("value", this.getAttribute("src"));
+            document.forms["exampleForm"].submit();
+        })
+    })
+</script>
 {% endblock %}
