@@ -1,21 +1,35 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Analysis
+Analysis
 {% endblock %}
 
 {% block main %}
-<h1 class="pb-4">Analysis</h1>
-<img src="{{ thumbnail_for_user }}"/>
-<p>
-    Leaf: {{ leaf }} || 
-    Certainty: {{ certainty }} || 
-    Time for analysis: {{ time }}
-</p>
+<section class="jumbotron text-center bg-transparent pt-1">
+	<h1 class="jumbotron-heading mb-3">analysis</h1>
 
-<form action="/" method="get">
-    <input type="submit" value="New Analysis">
-</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-2 col-0"></div>
+			<div class="col-lg-8">
+				<div class="card" id="analysis-card">
+					<div class="card-body">
+						<p class="card-text">
+							Leaf: {{ leaf }} || 
+							Certainty: {{ certainty }} || 
+							Time for analysis: {{ time }}
+						</p>
+						<a href="/" class="btn btn-primary mt-2">New Analysis!</a>
+					</div>
+					<img id="analysis-img" class="card-img-top" src="{{ thumbnail_for_user }}">
+				</div>
+			</div>
+			<div class="col-lg-2 col-0"></div>
+		</div>
+	</div>	
 
+	
+
+</section>
 
 {% endblock %}
