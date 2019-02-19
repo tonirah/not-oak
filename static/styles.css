@@ -68,3 +68,8 @@ main
 {
     background-color: #fff;
 }
+
+.examples
+{
+    cursor: pointer;
+}
