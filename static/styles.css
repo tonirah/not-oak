@@ -1,3 +1,4 @@
+/* General */
 html 
 {
     font-size:16px;
@@ -8,33 +9,6 @@ body
     background-color: #f8f9fa !important;
 }
 
-nav .navbar-brand
-{
-    /* size for brand */
-    font-size: xx-large;
-}
-
-nav .navbar-brand .green,
-h1 span
-{
-    color: #74991D;
-    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
-    letter-spacing: -0.15em;
-    word-spacing: -0.25em;
-    white-space: nowrap;
-}
-
-main
-{
-    /* scroll horizontally as needed */
-    overflow-x: auto;
-
-    /* center contents */
-    /* text-align: center; */
-}
-
-
-/* Fonts */
 h1, 
 h2 
 {
@@ -48,6 +22,32 @@ p
     font-family: Georgia, serif;
     font-size: 1.2em;
     color:#555;
+}
+
+
+/* Navigation */
+
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+nav .navbar-brand .green,
+h1 span
+{
+    color: #74991D;
+    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+    letter-spacing: -0.15em;
+    word-spacing: -0.25em;
+    white-space: nowrap;
+}
+
+
+/* Page Content */
+
+main
+{
+    overflow-x: auto;
 }
 
 .jumbotron em 
