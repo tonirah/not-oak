@@ -6,31 +6,49 @@
 
 {% block main %}
 
+<section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Welcome!</h1>
+        <p class="lead text-muted">
+            My name is <a href="https://github.com/tonirah/" rel="noreferrer" target="_blank">Toni</a>, and for my <a href="https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x" rel="noreferrer" target="_blank">CS50</a> final project,
+            I made a computer vision AI app, that can detect oak leaves! Upload an .jpg image of a leaf, or try one of the examples below.
+            See <a href="/about">about</a> for more info about the project.
+        </p>
 
-<!-- Intro text, reference hotdog app, upload a jpg picture or use examples below. More information about the project in about. -->
-<p>
-    Welcome! My name is <a href="https://github.com/tonirah/" rel="noreferrer" target="_blank">Toni</a>, and for my <a href="https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x" rel="noreferrer" target="_blank">CS50</a> final project,
-    I made a computer vision AI app, that can detect oak leaves! Upload an .jpg image of a leaf, or try one of the examples below.
-    See <a href="/about">about</a> for more info about the project.
-</p>
-
-{% with messages = get_flashed_messages() %}
+        <div class="row mt-4">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                        {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <ul class=flashes>
+    <div class="alert alert-danger" role="alert">
         {% for message in messages %}
-            <li>{{ message }}</li>
+            {{ message }}
         {% endfor %}
-        </ul>
+    </div>
     {% endif %}
 {% endwith %}
-
-<h2>Upload image of leaf (closeup, format .jpg)</h2>
-<!-- Make nice form -->
 <form action="" method="post" enctype="multipart/form-data">
-    <input type="file" name="file">
-    <input type="submit" value="Upload">
+    <div class="input-group">
+        <div class="custom-file">
+          <input name="file" type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label text-left" for="customFile">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload!</button>
+        </div>
+    </div>
+    <small class="form-text text-mutes text-left pl-2">Upload image of leaf (closeup, format .jpg)</small>
 </form>
-<br>
+</div>
+<div class="col-lg-3"></div>
+            </div>
+            
+        </div>
+
+</div>
+</section>
+
+
 
 <!-- 9 example images on cloudify -->
 <form name="exampleForm"  action="analysis_example" method="post">
